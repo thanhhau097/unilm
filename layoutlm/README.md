@@ -1,4 +1,12 @@
 # LayoutLM
+
+### TODO:
+- refactor code
+- add train MVLM
+- add evaluation
+- add converting data
+- add visualization
+- add inference code
 **Multimodal (text + layout/format + image) pre-training for document AI**
 
 - December 29th, 2020: [LayoutLMv2](https://arxiv.org/abs/2012.14740) is coming with the new SOTA on a wide varierty of document AI tasks, including [DocVQA](https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1) and [SROIE](https://rrc.cvc.uab.es/?ch=13&com=evaluation&task=3) leaderboard.
