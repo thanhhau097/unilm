@@ -2,12 +2,12 @@
 
 ### TODO:
 - refactor code using huggingface/transformers -> DONE
-- add log for training
+- add log for training -> DEFAULT DONE
 - add train MVLM -> DONE
-- add evaluation
+- add evaluation -> DEFAULT DONE
+- add inference code
 - add converting data
 - add visualization
-- add inference code
 - for Japanese, use word embedding of Bert (because there is no pretrained model for LayoutLM) and position embedding of LayoutLM to finetune LayoutLM model
 
 ### Ian recommendation
@@ -17,7 +17,7 @@
 
 ### How to run?
 ```
-CUDA_VISIBLE_DEVICES=1 python run_seq_labeling.py --data_dir data --model_type layoutlm --model_name_or_path "bert-base-uncased" --do_lower_case --max_seq_length 512 --do_train --num_train_epochs 100 --logging_steps 10 --save_steps -1 --output_dir outputs --labels data/labels.txt --per_gpu_train_batch_size 2 --per_gpu_eval_batch_size 2 --overwrite_output_dir
+CUDA_VISIBLE_DEVICES=3 python run_seq_labeling.py --data_dir data --model_type layoutlm --model_name_or_path microsoft/layoutlm-base-uncased --do_lower_case --max_seq_length 512 --do_train --num_train_epochs 100 --logging_steps 10 --save_steps -1 --output_dir outputs --labels data/labels.txt --per_gpu_train_batch_size 2 --per_gpu_eval_batch_size 2 --overwrite_output_dir --evaluate_during_training 
 ```
 **Multimodal (text + layout/format + image) pre-training for document AI**
 
