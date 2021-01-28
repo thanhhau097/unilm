@@ -1,12 +1,24 @@
 # LayoutLM
 
 ### TODO:
-- refactor code
-- add train MVLM
+- refactor code using huggingface/transformers -> DONE
+- add log for training
+- add train MVLM -> DONE
 - add evaluation
 - add converting data
 - add visualization
 - add inference code
+- for Japanese, use word embedding of Bert (because there is no pretrained model for LayoutLM) and position embedding of LayoutLM to finetune LayoutLM model
+
+### Ian recommendation
+- For Japanese dataset, please set layoutlm_model to our pretrained weights and bert_model to None.
+- For English dataset, please set layoutlm_model to the default LayoutLM pretrained weights (microsoft/layoutlm-base-uncased) and bert_model to None.
+- For other languages, please set layoutlm_model to the default LayoutLM pretrained weights (microsoft/layoutlm-base-uncased) and bert_model to a bert-base pretrained weights of your target language from the list of huggingface transformers.
+
+### How to run?
+```
+CUDA_VISIBLE_DEVICES=1 python run_seq_labeling.py --data_dir data --model_type layoutlm --model_name_or_path "bert-base-uncased" --do_lower_case --max_seq_length 512 --do_train --num_train_epochs 100 --logging_steps 10 --save_steps -1 --output_dir outputs --labels data/labels.txt --per_gpu_train_batch_size 2 --per_gpu_eval_batch_size 2 --overwrite_output_dir
+```
 **Multimodal (text + layout/format + image) pre-training for document AI**
 
 - December 29th, 2020: [LayoutLMv2](https://arxiv.org/abs/2012.14740) is coming with the new SOTA on a wide varierty of document AI tasks, including [DocVQA](https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1) and [SROIE](https://rrc.cvc.uab.es/?ch=13&com=evaluation&task=3) leaderboard.

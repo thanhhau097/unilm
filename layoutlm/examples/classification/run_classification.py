@@ -24,7 +24,9 @@ from transformers import (
     get_linear_schedule_with_warmup,
 )
 
-from layoutlm import LayoutlmConfig, LayoutlmForSequenceClassification
+# from layoutlm import LayoutlmConfig, LayoutlmForSequenceClassification
+from transformers import LayoutLMConfig as LayoutlmConfig, LayoutLMForSequenceClassification as LayoutlmForSequenceClassification
+
 from layoutlm.data.rvl_cdip import CdipProcessor, load_and_cache_examples
 
 try:
@@ -35,13 +37,13 @@ except:
 
 logger = logging.getLogger(__name__)
 
-ALL_MODELS = sum(
-    (
-        tuple(conf.pretrained_config_archive_map.keys())
-        for conf in (BertConfig, RobertaConfig, LayoutlmConfig)
-    ),
-    (),
-)
+# ALL_MODELS = sum(
+#     (
+#         tuple(conf.pretrained_config_archive_map.keys())
+#         for conf in (BertConfig, RobertaConfig, LayoutlmConfig)
+#     ),
+#     (),
+# )
 
 MODEL_CLASSES = {
     "bert": (BertConfig, BertForSequenceClassification, BertTokenizerFast),
@@ -363,8 +365,8 @@ def main():
         default=None,
         type=str,
         required=True,
-        help="Path to pre-trained model or shortcut name selected in the list: "
-        + ", ".join(ALL_MODELS),
+        # help="Path to pre-trained model or shortcut name selected in the list: "
+        # + ", ".join(ALL_MODELS),
     )
     parser.add_argument(
         "--output_dir",

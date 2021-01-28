@@ -49,17 +49,19 @@ from transformers import (
     get_linear_schedule_with_warmup,
 )
 
-from layoutlm import FunsdDataset, LayoutlmConfig, LayoutlmForTokenClassification
+from layoutlm import FunsdDataset# , LayoutlmConfig, LayoutlmForTokenClassification
+from transformers import LayoutLMConfig as LayoutlmConfig, LayoutLMForTokenClassification as LayoutlmForTokenClassification
+
 
 logger = logging.getLogger(__name__)
 
-ALL_MODELS = sum(
-    (
-        tuple(conf.pretrained_config_archive_map.keys())
-        for conf in (BertConfig, RobertaConfig, LayoutlmConfig)
-    ),
-    (),
-)
+# ALL_MODELS = sum(
+#     (
+#         tuple(conf.pretrained_config_archive_map.keys())
+#         for conf in (BertConfig, RobertaConfig, LayoutlmConfig)
+#     ),
+#     (),
+# )
 
 MODEL_CLASSES = {
     "bert": (BertConfig, BertForTokenClassification, BertTokenizer),
@@ -245,7 +247,7 @@ def train(  # noqa C901
                 scheduler.step()  # Update learning rate schedule
                 model.zero_grad()
                 global_step += 1
-
+                
                 if (
                     args.local_rank in [-1, 0]
                     and args.logging_steps > 0
@@ -261,7 +263,7 @@ def train(  # noqa C901
                             tokenizer,
                             labels,
                             pad_token_label_id,
-                            mode="dev",
+                            mode="test",
                         )
                         for key, value in results.items():
                             tb_writer.add_scalar(
@@ -415,8 +417,8 @@ def main():  # noqa C901
         default=None,
         type=str,
         required=True,
-        help="Path to pre-trained model or shortcut name selected in the list: "
-        + ", ".join(ALL_MODELS),
+        # help="Path to pre-trained model or shortcut name selected in the list: "
+        # + ", ".join(ALL_MODELS),
     )
     parser.add_argument(
         "--output_dir",

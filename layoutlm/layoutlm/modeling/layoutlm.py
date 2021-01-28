@@ -1,3 +1,5 @@
+# NOTE: this file is not used anymore, replace by using transformers LayoutLM
+
 import logging
 
 import torch
